@@ -3,8 +3,8 @@ import joblib
 import os
 import pandas as pd
 
-model_path = "models/text_classification_model.pkl"
-vectorizer_path = "models/tfidf_vectorizer.pkl"
+model_path = "text_classification_model.pkl"
+vectorizer_path = "tfidf_vectorizer.pkl"
 
 model = joblib.load(model_path)
 vectorizer = joblib.load(vectorizer_path)
