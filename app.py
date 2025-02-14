@@ -1,14 +1,28 @@
 import streamlit as st
-from transformers import pipeline
+import joblib
+import os
+import pandas as pd
 
-MODEL = "jy46604790/Fake-News-Bert-Detect"
-clf = pipeline("text-classification", model=MODEL, tokenizer=MODEL)
+model_path = "models/text_classification_model.pkl"
+vectorizer_path = "models/tfidf_vectorizer.pkl"
 
-# ✅ Fake news prediction function
-def predict_fake_news(text):
-    result = clf(text)
-    return result
-    #return "😊 Positive" if prediction[0] == 1 else "😞 Negative"
+model = joblib.load(model_path)
+vectorizer = joblib.load(vectorizer_path)
+
+# ✅ Function to test the model
+def predict_text(text):
+    """ Predicts whether a given text is classified as label 0 or 1. """
+
+    # Transform input text using TF-IDF vectorizer
+    text_tfidf = vectorizer.transform([text])
+
+    # Make prediction
+    prediction = model.predict(text_tfidf)[0]
+
+    # Map label to human-readable output
+    if prediction == 0:
+        return "😞 Fake"
+    else: return "😊 Real"
 
 # ✅ Streamlit UI
 st.set_page_config(page_title="Fake News Detector", page_icon="💬", layout="centered")
@@ -22,7 +36,7 @@ user_input = st.text_area("📝 Enter your article here:", height=150, placehold
 # Predict sentiment
 if st.button("🔍 Detect Fake News"):
     if user_input.strip():
-        result = predict_fake_news(user_input)
+        result = predict_text(user_input)
         if result != "Error":
             st.success(f"**Result :** {result}")
     else:
