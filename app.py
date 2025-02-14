@@ -31,7 +31,7 @@ if st.button("🔍 Detect Fake News"):
 # ✅ Extra UI enhancements
 st.markdown("---")
 st.markdown("### ✨ Why use this app?")
-st.markdown("- 🔥 **Instant Sentiment Analysis** for your tweets!")
+st.markdown("- 🔥 **Instant Fake News Detection** for your articles!")
 st.markdown("- 🎨 **Beautiful & Minimal UI** for easy interaction.")
 st.markdown("- 🚀 **Fast & Efficient** model built with TF-IDF & Logistic Regression.")
 st.markdown("---")
