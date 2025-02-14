@@ -1,6 +1,5 @@
 transformers
 numpy
 pandas
-torch
+torch==2.0.1
 tokenizers
-tensorflow
