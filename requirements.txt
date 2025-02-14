@@ -2,3 +2,4 @@ transformers
 numpy
 pandas
 joblib
+scikit-learn
